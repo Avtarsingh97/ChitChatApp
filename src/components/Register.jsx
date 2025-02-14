@@ -1,29 +1,79 @@
+import { useState } from "react";
+import ProfileSelector from "./ProfileSelector";
 
 
-function Login({funcSetLogin}) {
+function Login({ funcSetLogin }) {
 
-    const handleClickLogin = ()=>{
-        funcSetLogin(true);
-    }
+    const [profileModal, setProfileModal] = useState(false)
 
-    return (
-      <div className="md:w-full h-[100vh] flex bg-gradient-to-r from-blue-200 to-cyan-200 flex-col md:flex-row items-center">
-          <div className="w-full flex justify-center box-border">
-             
-              <div className="w-[80%] md:w-[40%] h-fit box-border mt-[10%] md:m-0 text-black shadow-2xl bg-gradient-to-r from-cyan-40 to-blue-300 rounded-2xl text-center hover:scale-110 hover:duration-700 px-4 py-9">
-                  <p className="text-2xl font-bold ">REGISTER</p>
-                  <form action="" className="w-full box-border flex flex-col gap-2 items-center mt-8">
-                      <input type="text" name="phone" placeholder="Enter 10 Digit Mobile Number" className="border border-gray-300 rounded-lg px-5 py-2 w-full"/>
-                      <input type="password" name="password" placeholder="Enter Username" className="border border-gray-300 rounded-lg px-5 py-2 w-full"/>
-                      <input type="password" name="password" placeholder="Enter Password" className="border border-gray-300 rounded-lg px-5 py-2 w-full"/>
-                      
-                      <button className="bg-blue-400 px-5 py-2 rounded-xl cursor-pointer hover:bg-blue-500 w-[50%] font-semibold text-xl mt-2">Register</button>
-                      <a className="cursor-pointer text-black mt-8 hover:underline" onClick={handleClickLogin}>Already have an account? Login</a>
-                  </form>
-              </div>
-          </div>
-      </div>
-    )
+  const handleClickLogin = () => {
+    funcSetLogin(true);
+  };
+
+  const handleProfileModalClose = () => {
+    setProfileModal(prev => !prev)
   }
-  
-  export default Login
+
+  return (
+    <div className='md:w-full h-[100vh] flex bg-gradient-to-r from-blue-200 to-cyan-200 flex-col md:flex-row items-center'>
+
+      <div className='w-full flex justify-center box-border'>
+
+        <div className='w-[80%] md:w-[60%] h-fit box-border mt-[10%] md:m-0 text-black shadow-2xl bg-gradient-to-r from-cyan-40 to-blue-300 rounded-2xl text-center hover:scale-110 hover:duration-700 px-4 py-9'>
+
+          <p className='text-2xl font-bold '>REGISTER</p>
+
+          <form
+            action=''
+            className='w-full box-border flex flex-col gap-2 items-center mt-8'
+          >
+            <div className='register-container flex flex-col-reverse md:flex-row gap-x-2 w-full justify-center items-center'>
+              <div className='left w-full md:w-[70%] flex flex-col gap-y-2 mt-2 md:m-0'>
+                <input
+                  type='text'
+                  name='phone'
+                  placeholder='Enter 10 Digit Mobile Number'
+                  className='border border-gray-300 rounded-lg px-5 py-2 w-full'
+                />
+                <input
+                  type='password'
+                  name='password'
+                  placeholder='Enter Username'
+                  className='border border-gray-300 rounded-lg px-5 py-2 w-full'
+                />
+                <input
+                  type='password'
+                  name='password'
+                  placeholder='Enter Password'
+                  className='border border-gray-300 rounded-lg px-5 py-2 w-full'
+                />
+              </div>
+
+              <div className='right w-full md:w-[30%] text-xl flex flex-row md:flex-col justify-center items-center'>
+                <div className="avatar pb-2 pr-2 md:pr-0 flex justify-center">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTdaxkxnMrakMtywgSFKKcPo1pmpNJQe2KtvaZUca9Fb0JkkPbRx1P2A-FEXQWLYV9lyT8&usqp=CAU" alt="avatar image" className="w-[100px] h-[100px] rounded-full border-fuchsia-500 border-2"/>
+                </div>
+                <div className='outline px-2 text-sm py-1 rounded-xl hover:bg-blue-400 hover:outline-0 cursor-pointer' onClick={handleProfileModalClose}>Select Avatar</div>
+              </div>
+            </div>
+
+            <button className='bg-blue-400 px-5 py-2 rounded-xl cursor-pointer hover:bg-blue-500 w-[50%] font-semibold text-xl mt-2'>Register</button>
+            <a
+              className='cursor-pointer text-black mt-8 hover:underline'
+              onClick={handleClickLogin}
+            >
+              Already have an account? Login
+            </a>
+          </form>
+        </div>
+      </div>
+      {
+        profileModal && <div className="fixed w-full h-[100vh]">
+        <ProfileSelector handleProfileModalClose={handleProfileModalClose}/>
+      </div>
+      }
+    </div>
+  );
+}
+
+export default Login;
