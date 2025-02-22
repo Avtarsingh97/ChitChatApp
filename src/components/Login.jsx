@@ -8,7 +8,8 @@ function Login({funcSetLogin}) {
 
   return (
     <div className="md:w-full h-[100vh] flex bg-gradient-to-r from-blue-200 to-cyan-200 flex-col md:flex-row items-center">
-        <div className="w-full flex justify-center box-border">
+        <div className="w-full flex flex-col justify-center items-center box-border">
+        <div className="mb-7"><img src="/src/assets/Logo.webp" alt="logo" className='w-full text-center rounded-lg'/></div>
            
             <div className="w-[80%] md:w-[40%] h-fit box-border mt-[10%] md:m-0 text-black shadow-2xl bg-gradient-to-r from-cyan-40 to-blue-300 rounded-2xl text-center hover:scale-110 hover:duration-700 px-4 py-9">
                 <p className="text-2xl font-bold ">LOGIN</p>
