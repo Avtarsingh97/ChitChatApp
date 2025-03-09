@@ -5,21 +5,28 @@ import ProfileSelector from "./ProfileSelector";
 function Login({ funcSetLogin }) {
 
     const [profileModal, setProfileModal] = useState(false);
-    const [inputField,  setInputField] = useState({'phone':"",userName:"", password:"", profilePic:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTdaxkxnMrakMtywgSFKKcPo1pmpNJQe2KtvaZUca9Fb0JkkPbRx1P2A-FEXQWLYV9lyT8&usqp=CAU"});
+    const [inputField,  setInputField] = useState({phone:"",userName:"", password:"", profilePic:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTdaxkxnMrakMtywgSFKKcPo1pmpNJQe2KtvaZUca9Fb0JkkPbRx1P2A-FEXQWLYV9lyT8&usqp=CAU"});
 
+    
+    const handleClickLogin = () => {
+      funcSetLogin(true);
+    };
+    
     const handleSetImage = (link)=>{
       setInputField({
         ...inputField,['profilePic']:link
       })
-    }
-
-  const handleClickLogin = () => {
-    funcSetLogin(true);
-  };
+    };
 
   const handleProfileModalClose = () => {
     setProfileModal(prev => !prev)
-  }
+  };
+
+  const handleOnChange = (e,key) =>{
+    setInputField({
+      ...inputField,[key]:e.target.value
+    })
+  };
 
   return (
     <div className='md:w-full md:h-[100vh] flex bg-gradient-to-r from-blue-200 to-cyan-200 flex-col md:flex-row items-center'>
@@ -38,18 +45,24 @@ function Login({ funcSetLogin }) {
               <div className='left w-full md:w-[70%] flex flex-col gap-y-2 mt-2 md:m-0'>
                 <input
                   type='text'
+                  value={inputField.phone}
+                  onChange={(e)=>handleOnChange(e,"phone")}
                   name='phone'
                   placeholder='Enter 10 Digit Mobile Number'
                   className='border border-gray-300 rounded-lg px-5 py-2 w-full'
                 />
                 <input
                   type='text'
+                  value={inputField.userName}
+                  onChange={(e)=>handleOnChange(e,"userName")}
                   name='userName'
                   placeholder='Enter Username'
                   className='border border-gray-300 rounded-lg px-5 py-2 w-full'
                 />
                 <input
                   type='password'
+                  value={inputField.password}
+                  onChange={(e)=>handleOnChange(e,"password")}
                   name='password'
                   placeholder='Enter Password'
                   className='border border-gray-300 rounded-lg px-5 py-2 w-full'

@@ -1,7 +1,9 @@
-import React from "react";
+import React,{useState} from "react";
 import SendIcon from '@mui/icons-material/Send';
 
 function Chats() {
+  const [content, setContent] = useState("")
+
   return (
     <div className='w-[70%] flex flex-col h-full bg-gray-200 rounded-r-xl '>
       <div className='w-full h-[76px] bg-gray-50 flex items-center px-2 py-1 box-border rounded-tr-xl'>
@@ -49,7 +51,7 @@ function Chats() {
       {/* message box */}
       <div className='h-[75px] bg-gray-50 px-2 py-1 box-border items-center flex justify-between w-full rounded-br-xl'>
         <div className="grow ">
-            <input type="text" placeholder="Type Your Message Here....." className="w-full h-[35px] px-3 py-1 box-border rounded-3xl border border-gray-300 bg-white focus:outline-0 text-gray-800"/>
+            <input type="text" value={content} onChange={(e)=>{setContent(e.target.value)}} placeholder="Type Your Message Here....." className="w-full h-[35px] px-3 py-1 box-border rounded-3xl border border-gray-300 bg-white focus:outline-0 text-gray-800"/>
 
         </div>
         <div>
