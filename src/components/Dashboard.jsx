@@ -4,8 +4,9 @@ import SearchIcon from "@mui/icons-material/Search";
 import Conversation from "./Coversation";
 import Chats from "./Chats";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
-function Dashboard() {
+function Dashboard({setLoginFunction}) {
   const [selectedUserDetails, setSelectedUserDetail] = useState(null);
   const [queryParam, setQueryParam] = useState("");
   const [searchData, setSearchData] = useState([]);
@@ -31,9 +32,16 @@ function Dashboard() {
     };
   }, [searchData]);
 
-  const handleLogout = () =>{
-    localStorage.clear();
-    navigate('/')
+  const handleLogout = async() =>{
+    await axios.post("http://localhost:8000/api/auth/logout",{},{withCredentials:true}).then((response)=>{
+      console.log(response)
+      localStorage.clear();
+      setLoginFunction(false);
+      navigate('/')
+    }).catch(err=>{
+      console.log(err);
+    })
+    
   }
 
   return (
